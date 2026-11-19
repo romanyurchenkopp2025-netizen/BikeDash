@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Зворотний зв'язок | BikeDash</title>
+  <meta name="description" content="Форма зворотного зв'язку BikeDash: залиште повідомлення, і ми відповімо найближчим часом.">
+
+  <!-- Tailwind через CDN: підходить для прототипу. Для production збирайте CSS через Tailwind CLI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="bg-[#F3FBF3] text-[#171A18] antialiased">
+
+  <main>
+    <section class="mx-auto w-full max-w-2xl px-4 py-12 sm:px-6 md:py-16" aria-labelledby="feedback-title">
+      <h1 id="feedback-title" class="text-2xl font-bold tracking-tight md:text-3xl">Зворотний зв'язок</h1>
+      <p class="mt-2 text-slate-600">Залиште повідомлення, і ми відповімо найближчим часом.</p>
+      <p class="mt-1 text-sm text-slate-600">Усі поля обов'язкові.</p>
+
+      <form
+        id="feedbackForm"
+        class="mt-8 space-y-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8"
+        action="#"
+        method="post"
+      >
+
+        <!-- Ім'я та email: 1 колонка на мобільному, 2 від md -->
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+          <div>
+            <label for="username" class="mb-1.5 block text-sm font-semibold">Ім'я</label>
+            <input
+              type="text"
+              id="username"
+              name="name"
+              autocomplete="name"
+              autocapitalize="words"
+              required
+              minlength="2"
+              maxlength="50"
+              aria-describedby="username-error"
+              class="block min-h-12 w-full rounded-xl border border-slate-500 bg-white px-4 py-3 text-base transition-[border-color,box-shadow,background-color] duration-200 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-60"
+            />
+            <p id="username-error" class="mt-1.5 min-h-5 text-sm font-medium text-red-700" aria-live="polite"></p>
+          </div>
+
+          <div>
+            <label for="email" class="mb-1.5 block text-sm font-semibold">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              inputmode="email"
+              autocomplete="email"
+              autocapitalize="none"
+              autocorrect="off"
+              spellcheck="false"
+              required
+              maxlength="254"
+              aria-describedby="email-error"
+              class="block min-h-12 w-full rounded-xl border border-slate-500 bg-white px-4 py-3 text-base transition-[border-color,box-shadow,background-color] duration-200 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-60"
+            />
+            <p id="email-error" class="mt-1.5 min-h-5 text-sm font-medium text-red-700" aria-live="polite"></p>
+          </div>
+
+        </div>
+
+        <!-- Телефон -->
+        <div>
+          <label for="phone" class="mb-1.5 block text-sm font-semibold">Телефон</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+            maxlength="20"
+            pattern="\+380[0-9]{9}"
+            aria-describedby="phone-hint phone-error"
+            class="block min-h-12 w-full rounded-xl border border-slate-500 bg-white px-4 py-3 text-base transition-[border-color,box-shadow,background-color] duration-200 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-60"
+          />
+          <p id="phone-hint" class="mt-1.5 text-sm text-slate-600">Формат: +380501234567, без пробілів і дужок</p>
+          <p id="phone-error" class="min-h-5 text-sm font-medium text-red-700" aria-live="polite"></p>
+        </div>
+
+        <!-- Повідомлення -->
+        <div>
+          <label for="message" class="mb-1.5 block text-sm font-semibold">Повідомлення</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            minlength="10"
+            maxlength="1000"
+            aria-describedby="message-error"
+            class="block min-h-[120px] w-full resize-none rounded-xl border border-slate-500 bg-white px-4 py-3 text-base leading-relaxed transition-[border-color,box-shadow,background-color] duration-200 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] disabled:cursor-not-allowed disabled:bg-slate-100 disabled:opacity-60"
+          ></textarea>
+          <div class="mt-1.5 flex items-start justify-between gap-4">
+            <p id="message-error" class="min-h-5 text-sm font-medium text-red-700" aria-live="polite"></p>
+            <!-- Візуальний лічильник: aria-hidden, щоб скрінрідер не читав застарілі числа -->
+            <p id="message-counter" class="shrink-0 text-sm text-slate-600" aria-hidden="true">0 / 1000</p>
+          </div>
+        </div>
+
+        <!-- Згода -->
+        <div>
+          <div class="flex items-start gap-3">
+            <input
+              type="checkbox"
+              id="agreement"
+              name="consent"
+              value="yes"
+              required
+              aria-describedby="agreement-error"
+              class="mt-1 h-6 w-6 shrink-0 cursor-pointer rounded-md border-slate-500 accent-[#171A18] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18]"
+            />
+            <label for="agreement" class="min-h-11 flex-1 cursor-pointer py-1.5 text-sm leading-relaxed text-slate-700">
+              Погоджуюсь з
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" class="font-medium text-[#171A18] underline decoration-[#B8F23A] decoration-2 underline-offset-4 transition-colors hover:bg-[#B8F23A]/30 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18]">політикою конфіденційності<span class="sr-only"> (відкриється в новій вкладці)</span></a>
+              та обробкою персональних даних
+            </label>
+          </div>
+          <p id="agreement-error" class="mt-1 min-h-5 text-sm font-medium text-red-700" aria-live="polite"></p>
+        </div>
+
+        <!-- Кнопка -->
+        <button
+          type="submit"
+          id="feedback-submit"
+          class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#B8F23A] px-8 py-3 text-base font-bold text-[#171A18] transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#A5DC2F] hover:shadow-[0_4px_18px_rgba(184,242,58,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 md:w-auto md:min-w-48"
+        >
+          Надіслати
+        </button>
+
+      </form>
+    </section>
+  </main>
+
+  <!-- Модальне вікно успіху (нативний <dialog>, керується assets/js/success-modal.js) -->
+  <dialog
+    id="successModal"
+    class="fixed inset-0 m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[#171A18] shadow-xl backdrop:bg-[#171A18]/60 backdrop:backdrop-blur-sm"
+    aria-labelledby="successModalTitle"
+    aria-describedby="successModalText"
+  >
+    <div class="p-6 text-center sm:p-8">
+
+      <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-700" aria-hidden="true">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+
+      <h2 id="successModalTitle" class="text-xl font-bold tracking-tight">Повідомлення прийнято</h2>
+      <p id="successModalText" class="mt-2 text-base leading-relaxed text-slate-600">
+        Дякуємо! Ми відповімо найближчим часом.
+      </p>
+
+      <button
+        type="button"
+        id="successModalClose"
+        autofocus
+        class="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#B8F23A] px-8 py-3 text-base font-bold text-[#171A18] transition-[background-color,box-shadow,transform] duration-200 hover:bg-[#A5DC2F] hover:shadow-[0_4px_18px_rgba(184,242,58,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171A18] active:scale-[0.98]"
+      >
+        Закрити
+      </button>
+
+    </div>
+  </dialog>
+
+  <!-- Порядок важливий: спочатку валідація, потім модальне вікно -->
+  <script src="assets/js/validation.js" defer></script>
+  <script src="assets/js/success-modal.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+/*
+ * style.css
+ * Мінімум власних стилів: усе оформлення робить Tailwind.
+ */
+
+/* Системний шрифт-стек без зовнішніх залежностей */
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Резервуємо місце під смугу прокрутки, щоб макет не "стрибав" при відкритті модального вікна */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Поважаємо налаштування користувача щодо зменшення анімацій */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
