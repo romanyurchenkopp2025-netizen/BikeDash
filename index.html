@@ -19,9 +19,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
@@ -48,6 +49,7 @@
         <li><a href="#bikes" class="nav-link" data-spy="bikes">Велосипеди &amp; Тарифи</a></li>
         <li><a href="#how-it-works" class="nav-link" data-spy="how-it-works">Маршрути</a></li>
         <li><a href="#help" class="nav-link" data-spy="help">Допомога</a></li>
+        <li><a href="feedback-form/index.html" class="nav-link">Зв'язатися з нами</a></li>
       </ul>
     </nav>
 
@@ -428,6 +430,261 @@
         </div>
       </section>
 
+      <section class="py-14 sm:py-20" aria-labelledby="reviews-title">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <p class="text-sm font-semibold uppercase tracking-widest text-emerald-600 mb-3">Відгуки</p>
+            <h2 id="reviews-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 leading-tight">
+              Що кажуть наші велосипедисти
+            </h2>
+            <p class="mt-4 text-neutral-600 leading-relaxed">
+              Понад 10 000 поїздок по місту. Ось думки людей, які катаються з BikeDash щодня.
+            </p>
+          </div>
+
+          <div class="relative">
+            <div class="swiper reviews-swiper" role="region" aria-label="Відгуки клієнтів BikeDash">
+              <ul class="swiper-wrapper list-none p-0 m-0">
+                <li class="swiper-slide h-auto">
+                  <figure class="h-full flex flex-col rounded-2xl bg-white border border-neutral-200 shadow-sm p-7 m-0">
+                    <div class="flex gap-0.5 text-amber-400 mb-5" role="img" aria-label="Рейтинг 5 з 5 зірок">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                    </div>
+                    <blockquote class="text-neutral-700 leading-relaxed grow m-0">
+                      «Орендував велосипед за дві хвилини прямо з телефону — уже за півгодини катався набережною. Велосипед чистий, гальма і швидкості працюють ідеально. Тепер це мій щоденний спосіб дістатися на роботу.»
+                    </blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&h=96&q=80"
+                        alt="Фото Олексія Ковальчука"
+                        width="48" height="48"
+                        loading="lazy"
+                        class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-100"
+                      />
+                      <div>
+                        <p class="font-semibold text-neutral-900 m-0">Олексій Ковальчук</p>
+                        <p class="text-sm text-neutral-500 m-0">Постійний клієнт, 2 роки з BikeDash</p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="swiper-slide h-auto">
+                  <figure class="h-full flex flex-col rounded-2xl bg-white border border-neutral-200 shadow-sm p-7 m-0">
+                    <div class="flex gap-0.5 text-amber-400 mb-5" role="img" aria-label="Рейтинг 5 з 5 зірок">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                    </div>
+                    <blockquote class="text-neutral-700 leading-relaxed grow m-0">
+                      «Бронювала електровелосипед на вихідні для поїздки за місто. Дуже зручна станція видачі, усе зрозуміло, а на місці чекав справний, доглянутий велосипед. Дуже дякую за сервіс!»
+                    </blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&h=96&q=80"
+                        alt="Фото Марини Шевченко"
+                        width="48" height="48"
+                        loading="lazy"
+                        class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-100"
+                      />
+                      <div>
+                        <p class="font-semibold text-neutral-900 m-0">Марина Шевченко</p>
+                        <p class="text-sm text-neutral-500 m-0">Подорожуємо з BikeDash щовихідних</p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="swiper-slide h-auto">
+                  <figure class="h-full flex flex-col rounded-2xl bg-white border border-neutral-200 shadow-sm p-7 m-0">
+                    <div class="flex gap-0.5 text-amber-400 mb-5" role="img" aria-label="Рейтинг 5 з 5 зірок">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                    </div>
+                    <blockquote class="text-neutral-700 leading-relaxed grow m-0">
+                      «Користуюся прокатом, щоб їздити на роботу — економлю майже годину в пробках щодня. Велосипеди завжди обкатані, а підтримка відповідає за кілька хвилин. Рекомендую всім!»
+                    </blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&h=96&q=80"
+                        alt="Фото Дмитра Бондаренка"
+                        width="48" height="48"
+                        loading="lazy"
+                        class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-100"
+                      />
+                      <div>
+                        <p class="font-semibold text-neutral-900 m-0">Дмитро Бондаренко</p>
+                        <p class="text-sm text-neutral-500 m-0">Абонемент «Місячний», рік із нами</p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="swiper-slide h-auto">
+                  <figure class="h-full flex flex-col rounded-2xl bg-white border border-neutral-200 shadow-sm p-7 m-0">
+                    <div class="flex gap-0.5 text-amber-400 mb-5" role="img" aria-label="Рейтинг 5 з 5 зірок">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                    </div>
+                    <blockquote class="text-neutral-700 leading-relaxed grow m-0">
+                      «Замовляла дитячий велосипед і дитяче крісло — усе видали швидко, із шоломом у комплекті. Дружній персонал, чесні ціни й жодних прихованих платежів. Тепер катаємо всією родиною!»
+                    </blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=96&h=96&q=80"
+                        alt="Фото Світлани Гриценко"
+                        width="48" height="48"
+                        loading="lazy"
+                        class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-100"
+                      />
+                      <div>
+                        <p class="font-semibold text-neutral-900 m-0">Світлана Гриценко</p>
+                        <p class="text-sm text-neutral-500 m-0">Сімейний прокат, клієнтка з 2024</p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+
+                <li class="swiper-slide h-auto">
+                  <figure class="h-full flex flex-col rounded-2xl bg-white border border-neutral-200 shadow-sm p-7 m-0">
+                    <div class="flex gap-0.5 text-amber-400 mb-5" role="img" aria-label="Рейтинг 5 з 5 зірок">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.05 2.93c.3-.92 1.6-.92 1.9 0l1.28 3.95a1 1 0 0 0 .95.69h4.15c.97 0 1.37 1.24.59 1.81l-3.36 2.44a1 1 0 0 0-.36 1.12l1.28 3.95c.3.92-.75 1.69-1.54 1.12l-3.36-2.44a1 1 0 0 0-1.18 0l-3.36 2.44c-.79.57-1.84-.2-1.54-1.12l1.28-3.95a1 1 0 0 0-.36-1.12L2.08 9.38c-.78-.57-.38-1.81.6-1.81h4.14a1 1 0 0 0 .95-.69l1.28-3.95Z"/></svg>
+                    </div>
+                    <blockquote class="text-neutral-700 leading-relaxed grow m-0">
+                      «Швидкий старт, докладна інструкція і чудовий маршрут у застосунку. Прокотив 40 км за день — велосипед жодного разу не підвів. Це найкращий прокат, яким я користувався.»
+                    </blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                      <img
+                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=96&h=96&q=80"
+                        alt="Фото Андрія Ткаченка"
+                        width="48" height="48"
+                        loading="lazy"
+                        class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-100"
+                      />
+                      <div>
+                        <p class="font-semibold text-neutral-900 m-0">Андрій Ткаченко</p>
+                        <p class="text-sm text-neutral-500 m-0">Турист, гість міста</p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
+
+              <div class="swiper-pagination !static !mt-8" aria-hidden="false"></div>
+            </div>
+
+            <button
+              type="button"
+              class="reviews-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex w-11 h-11 items-center justify-center rounded-full bg-white border border-neutral-200 shadow-md text-neutral-600 hover:text-emerald-700 hover:border-emerald-300 hover:shadow-lg transition-all cursor-pointer"
+              aria-label="Попередній відгук"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="reviews-next absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex w-11 h-11 items-center justify-center rounded-full bg-white border border-neutral-200 shadow-md text-neutral-600 hover:text-emerald-700 hover:border-emerald-300 hover:shadow-lg transition-all cursor-pointer"
+              aria-label="Наступний відгук"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-14 sm:py-20 bg-white border-t border-neutral-200" aria-labelledby="gallery-title">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <p class="text-sm font-semibold uppercase tracking-widest text-emerald-600 mb-3">Галерея</p>
+            <h2 id="gallery-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 leading-tight">
+              Наші велосипеди в руках
+            </h2>
+            <p class="mt-4 text-neutral-600 leading-relaxed">
+              Подивіться, як виглядає прокат BikeDash наживо. Натисніть на фото, щоб відкрити його на весь екран.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <a
+              href="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1600&q=80"
+              data-fancybox="bike-gallery"
+              data-caption="Міський велосипед BikeDash Cruiser — ідеальний для прогулянок набережною"
+              class="group relative block overflow-hidden rounded-2xl border border-neutral-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+              aria-label="Відкрити фото: Міський велосипед BikeDash Cruiser"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&h=600&q=80"
+                alt="Міський велосипед BikeDash Cruiser на набережній"
+                width="800" height="600"
+                loading="lazy"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/80 to-transparent p-4 text-sm font-medium text-white">
+                BikeDash Cruiser — міський
+              </span>
+            </a>
+
+            <a
+              href="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=1600&q=80"
+              data-fancybox="bike-gallery"
+              data-caption="Електровелосипед BikeDash Volt — до 80 км ходу на одному заряді"
+              class="group relative block overflow-hidden rounded-2xl border border-neutral-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+              aria-label="Відкрити фото: Електровелосипед BikeDash Volt"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&h=600&q=80"
+                alt="Електровелосипед BikeDash Volt"
+                width="800" height="600"
+                loading="lazy"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/80 to-transparent p-4 text-sm font-medium text-white">
+                BikeDash Volt — електро
+              </span>
+            </a>
+
+            <a
+              href="https://images.unsplash.com/photo-1532298229144-0ec0c57515f7?auto=format&fit=crop&w=1600&q=80"
+              data-fancybox="bike-gallery"
+              data-caption="Гірський велосипед BikeDash Trail — для виїздів за місто"
+              class="group relative block overflow-hidden rounded-2xl border border-neutral-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+              aria-label="Відкрити фото: Гірський велосипед BikeDash Trail"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1532298229144-0ec0c57515f7?auto=format&fit=crop&w=800&h=600&q=80"
+                alt="Гірський велосипед BikeDash Trail на стежці"
+                width="800" height="600"
+                loading="lazy"
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <span class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-neutral-900/80 to-transparent p-4 text-sm font-medium text-white">
+                BikeDash Trail — гірський
+              </span>
+            </a>
+          </div>
+        </div>  
+      </section>
+
+
       <!-- Секція локацій з новим стандартом тегу <search> та <figure> для мапи -->
       <section class="block block-dark" id="stations" aria-labelledby="stations-title">
         <div class="container">
@@ -651,7 +908,7 @@
       </div>
     </div>
 
-<a href="feedback-form/index.html">Зв'язатися з нами</a>
+
 
   </div>
 </footer>
@@ -956,6 +1213,11 @@
       };
       window.syncBikeCards('E-Bike Turbo');
     });
+    
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
+<script src="feedback-form/assets/js/success-modal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </body>
 </html>

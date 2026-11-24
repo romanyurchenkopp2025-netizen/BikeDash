@@ -61,3 +61,60 @@
   closeButton.addEventListener('click', closeModal);
   modal.addEventListener('close', handleClose);
 })();
+window.addEventListener('load', () => {
+  if (document.querySelector('.reviews-swiper') && typeof Swiper !== 'undefined') {
+    new Swiper('.reviews-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      grabCursor: true,
+      a11y: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.reviews-next',
+        prevEl: '.reviews-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 24,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 32,
+        },
+      },
+    });
+  }
+
+  if (typeof Fancybox !== 'undefined' && document.querySelector('[data-fancybox="bike-gallery"]')) {
+    Fancybox.bind('[data-fancybox="bike-gallery"]', {
+      showClass: 'f-fadeIn',
+      hideClass: 'f-fadeOut',
+      Carousel: {
+        transition: 'fade',
+      },
+      Images: {
+        zoom: true,
+        Panzoom: {
+          maxScale: 4,
+        },
+      },
+      Toolbar: {
+        display: {
+          left: [],
+          middle: ['prev', 'infobar'],
+          right: ['zoomIn', 'zoomOut', 'close'],
+        },
+      },
+    });
+  }
+});
