@@ -22,6 +22,34 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- ЛР11: токени Design System BikeDash для Tailwind (кольори з css/style.css → :root) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: '#171A18', hover: '#262B28' },
+            accent:  { DEFAULT: '#B8F23A', hover: '#A5DC2F' },
+            canvas: '#F3FBF3',
+            surface: { card: '#FFFFFF', alt: '#EAF3EA', inverse: '#202421' },
+            ink: { DEFAULT: '#171A18', secondary: '#5F665F', inverse: '#F3FBF3', 'inverse-soft': '#E2E8E2', 'inverse-muted': '#A3ACA3' },
+            line: { subtle: '#D7E0D7', inverse: '#2A302B' },
+            success: '#1E7E34',
+            warning: '#9C5400',
+            danger:  '#BA1A1A'
+          },
+          fontFamily: { heading: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          boxShadow: {
+            card: '0 12px 32px rgba(23, 26, 24, 0.08)',
+            glow: '0 4px 18px rgba(184, 242, 58, 0.40)'
+          },
+          maxWidth: { container: '1140px' }
+        }
+      }
+    }
+  </script>
+  <!-- ЛР11: бізнес-логіка калькулятора (Vanilla JS) -->
+  <script src="js/widget.js" defer></script>
 
 </head>
 <body>
@@ -143,94 +171,278 @@
         </div>
       </section>
 
-      <!-- Секція калькулятора оформлена семантичною формою -->
+      <!-- ===================== ВІДЖЕТ: КАЛЬКУЛЯТОР ОРЕНДИ (ЛР11) ===================== -->
       <section class="block" id="calculator" aria-labelledby="calculator-title">
-        <div class="container">
-          <p class="label">Live cost estimator</p>
-          <h2 class="title-l" id="calculator-title">Розрахувати вартість оренди велосипеда</h2>
-          <p class="text">Змінюй тривалість та опції, зокрема дитяче сидіння для прокату з дитиною, сума оновлюється миттєво.</p>
+        <div class="container" id="calculator-container">
 
-          <form class="calc" aria-label="Калькулятор вартості оренди">
-            <div class="calc-options">
-              <fieldset class="calc-step" aria-labelledby="bike-type-title">
-                <legend class="title-s" id="bike-type-title">1. Оберіть тип велосипеда</legend>
-                <div class="row bike-types" role="radiogroup" aria-label="Вибір типу велосипеда">
-                  <button type="button" class="option" data-name="City Commuter" data-rate="45" role="radio" aria-checked="false">
-                    <strong>City Commuter</strong><br><span class="text-s">45 ₴/год</span>
-                  </button>
-                  <button type="button" class="option option-active" data-name="E-Bike Turbo" data-rate="85" role="radio" aria-checked="true">
-                    <strong>E-Bike Turbo</strong><br><span class="text-s">85 ₴/год</span>
-                  </button>
-                  <button type="button" class="option" data-name="Trail MTB" data-rate="60" role="radio" aria-checked="false">
-                    <strong>Trail MTB</strong><br><span class="text-s">60 ₴/год</span>
-                  </button>
-                </div>
-              </fieldset>
+          <!-- 1. Заголовок віджета -->
+          <header id="calculator-header" class="mb-8 max-w-2xl">
+            <p class="label" id="calculator-eyebrow">Live cost estimator</p>
+            <h2 class="title-l" id="calculator-title">Розрахуйте вартість оренди велосипеда</h2>
+            <p class="text text-ink-secondary" id="calculator-description">
+              Оберіть велосипед, тривалість, кількість, маршрут і спорядження: сума оновлюється миттєво.
+            </p>
+          </header>
 
-              <fieldset class="calc-step" aria-labelledby="duration-title">
-                <legend class="title-s" id="duration-title">
-                  2. Тривалість оренди: <span id="duration-val">2</span> <span id="duration-unit">години</span>
+          <form id="rental-calculator" class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start"
+                aria-describedby="calculator-description" novalidate>
+
+            <!-- Ліва колонка: кроки вибору -->
+            <div id="calculator-steps" class="flex flex-col gap-4">
+
+              <!-- 7. Загальна область повідомлень про помилки -->
+              <div id="calc-errors" class="rounded-xl border border-danger/30 bg-danger/5 p-4 text-sm text-danger"
+                   role="alert" aria-live="assertive" aria-labelledby="calc-errors-title" hidden>
+                <p id="calc-errors-title" class="font-semibold">Перевірте введені дані</p>
+                <ul id="calc-errors-list" class="mt-1 list-disc pl-5">
+                  <!-- Сюди JS додаватиме повідомлення про помилки -->
+                </ul>
+              </div>
+
+              <!-- Крок 1. Тип велосипеда -->
+              <fieldset id="step-bike" class="rounded-xl border border-line-subtle bg-surface-card p-4 shadow-sm md:p-6">
+                <legend id="step-bike-title" class="float-left mb-4 w-full font-heading text-lg font-bold">
+                  1. Оберіть тип велосипеда
                 </legend>
-                <div class="slider-wrapper">
-                  <input type="range" id="duration-slider" class="range-slider" min="1" max="12" value="2" step="1" aria-label="Тривалість оренди в годинах">
-                  <div class="slider-ticks">
-                    <span>1 год</span>
-                    <span>3 год</span>
-                    <span>6 год</span>
-                    <span>9 год</span>
-                    <span>12 год</span>
-                  </div>
-                </div>
-                <div class="row duration-presets" role="group" aria-label="Швидкий вибір тривалості оренди">
-                  <button type="button" class="chip chip-btn" data-hours="1">1 год</button>
-                  <button type="button" class="chip chip-btn active" data-hours="2">2 год</button>
-                  <button type="button" class="chip chip-btn" data-hours="4">4 год (День)</button>
-                  <button type="button" class="chip chip-btn" data-hours="12">12 год (макс.)</button>
+
+                <div id="bike-type-options" class="clear-both grid gap-3 sm:grid-cols-3">
+                  <label id="bike-city-card" for="bike-city"
+                         class="relative flex cursor-pointer flex-col gap-1 rounded-xl border border-line-subtle bg-surface-card p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20 has-[:checked]:shadow-glow has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[:focus-visible]:ring-offset-2">
+                    <input type="radio" id="bike-city" name="bike-type" value="city"
+                           data-name="City Commuter" data-rate="45" class="peer sr-only">
+                    <span id="bike-city-check" class="absolute right-3 top-3 grid size-6 place-items-center rounded-full bg-primary text-xs font-bold text-accent opacity-0 transition peer-checked:opacity-100" aria-hidden="true">✓</span>
+                    <strong id="bike-city-name" class="text-base">City Commuter</strong>
+                    <span id="bike-city-rate" class="text-sm text-ink-secondary">45 ₴ / год</span>
+                  </label>
+
+                  <label id="bike-ebike-card" for="bike-ebike"
+                         class="relative flex cursor-pointer flex-col gap-1 rounded-xl border border-line-subtle bg-surface-card p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20 has-[:checked]:shadow-glow has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[:focus-visible]:ring-offset-2">
+                    <input type="radio" id="bike-ebike" name="bike-type" value="ebike"
+                           data-name="E-Bike Turbo" data-rate="85" class="peer sr-only" checked>
+                    <span id="bike-ebike-check" class="absolute right-3 top-3 grid size-6 place-items-center rounded-full bg-primary text-xs font-bold text-accent opacity-0 transition peer-checked:opacity-100" aria-hidden="true">✓</span>
+                    <strong id="bike-ebike-name" class="text-base">E-Bike Turbo</strong>
+                    <span id="bike-ebike-rate" class="text-sm text-ink-secondary">85 ₴ / год</span>
+                  </label>
+
+                  <label id="bike-mtb-card" for="bike-mtb"
+                         class="relative flex cursor-pointer flex-col gap-1 rounded-xl border border-line-subtle bg-surface-card p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20 has-[:checked]:shadow-glow has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[:focus-visible]:ring-offset-2">
+                    <input type="radio" id="bike-mtb" name="bike-type" value="mtb"
+                           data-name="Trail MTB" data-rate="60" class="peer sr-only">
+                    <span id="bike-mtb-check" class="absolute right-3 top-3 grid size-6 place-items-center rounded-full bg-primary text-xs font-bold text-accent opacity-0 transition peer-checked:opacity-100" aria-hidden="true">✓</span>
+                    <strong id="bike-mtb-name" class="text-base">Trail MTB</strong>
+                    <span id="bike-mtb-rate" class="text-sm text-ink-secondary">60 ₴ / год</span>
+                  </label>
                 </div>
               </fieldset>
 
-              <fieldset class="calc-step" aria-labelledby="equipment-title">
-                <legend class="title-s" id="equipment-title">3. Додаткове спорядження</legend>
-                <div class="row-options equipment-options">
-                  <button type="button" class="option option-toggle" data-id="gps" data-name="GPS-навігація" data-price="0" aria-pressed="false">
-                    <span>GPS-навігація Старим Містом</span>
-                    <span class="option-badge">Безкоштовно</span>
-                  </button>
-                  <button type="button" class="option option-toggle option-active" data-id="helmet" data-name="Шолом безпеки" data-price="20" aria-pressed="true">
-                    <span>Шолом безпеки Thule</span>
-                    <span class="option-badge">+20 ₴/оренда</span>
-                  </button>
-                  <button type="button" class="option option-toggle" data-id="seat" data-name="Дитяче сидіння" data-price="50" aria-pressed="false">
-                    <span>Дитяче сидіння Thule RideAlong</span>
-                    <span class="option-badge">+50 ₴/оренда</span>
-                  </button>
-                  <button type="button" class="option option-toggle option-active" data-id="insurance" data-name="Страховка BikeDash Care" data-price="40" aria-pressed="true">
-                    <span>BikeDash Care 100% (страховка)</span>
-                    <span class="option-badge">+40 ₴/оренда</span>
-                  </button>
+              <!-- Крок 2. Тривалість оренди -->
+              <fieldset id="step-duration" class="rounded-xl border border-line-subtle bg-surface-card p-4 shadow-sm md:p-6">
+                <legend id="step-duration-title" class="float-left mb-4 w-full font-heading text-lg font-bold">
+                  2. Тривалість оренди:
+                  <output id="duration-value" for="duration-range" class="text-primary">2</output>
+                  <span id="duration-unit">години</span>
+                </legend>
+
+                <div id="duration-control" class="clear-both">
+                  <label for="duration-range" id="duration-range-label" class="sr-only">Тривалість оренди в годинах</label>
+                  <input type="range" id="duration-range" name="duration" min="1" max="12" step="1" value="2"
+                         class="h-2 w-full cursor-pointer accent-primary"
+                         aria-describedby="duration-scale duration-error">
+
+                  <div id="duration-scale" class="mt-2 flex justify-between text-xs text-ink-secondary" aria-hidden="true">
+                    <span>1 год</span><span>3 год</span><span>6 год</span><span>9 год</span><span>12 год</span>
+                  </div>
+
+                  <div id="duration-presets" class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4"
+                       role="group" aria-label="Швидкий вибір тривалості">
+                    <button type="button" id="preset-1h" data-hours="1" aria-pressed="false"
+                            class="rounded-full border border-line-subtle px-3 py-2 text-sm font-medium transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-accent">1 год</button>
+                    <button type="button" id="preset-2h" data-hours="2" aria-pressed="true"
+                            class="rounded-full border border-line-subtle px-3 py-2 text-sm font-medium transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-accent">2 год</button>
+                    <button type="button" id="preset-4h" data-hours="4" aria-pressed="false"
+                            class="rounded-full border border-line-subtle px-3 py-2 text-sm font-medium transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-accent">4 год</button>
+                    <button type="button" id="preset-12h" data-hours="12" aria-pressed="false"
+                            class="rounded-full border border-line-subtle px-3 py-2 text-sm font-medium transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-accent">12 год</button>
+                  </div>
+
+                  <p id="duration-error" class="mt-2 text-sm font-medium text-danger" hidden>
+                    Тривалість має бути від 1 до 12 годин.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- Крок 3. Кількість велосипедів (поле кількості) -->
+              <fieldset id="step-quantity" class="rounded-xl border border-line-subtle bg-surface-card p-4 shadow-sm md:p-6">
+                <legend id="step-quantity-title" class="float-left mb-4 w-full font-heading text-lg font-bold">
+                  3. Кількість велосипедів
+                </legend>
+
+                <div id="quantity-control" class="clear-both">
+                  <label for="bikes-count" id="bikes-count-label" class="sr-only">Кількість велосипедів, від 1 до 10</label>
+                  <div id="bikes-stepper" class="flex w-full max-w-[240px] items-center rounded-full border border-line-subtle bg-surface-card p-1 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary has-[[aria-invalid=true]]:border-danger">
+                    <button type="button" id="bikes-decrease" aria-controls="bikes-count" aria-label="Зменшити кількість велосипедів" disabled
+                            class="grid size-10 shrink-0 place-items-center rounded-full bg-surface-alt text-lg font-bold transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-surface-alt">−</button>
+                    <input type="number" id="bikes-count" name="bikes-count" min="1" max="10" step="1" value="1"
+                           inputmode="numeric" required aria-invalid="false"
+                           aria-describedby="bikes-count-hint bikes-count-error"
+                           class="w-full min-w-0 bg-transparent text-center text-lg font-bold tabular-nums outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none">
+                    <button type="button" id="bikes-increase" aria-controls="bikes-count" aria-label="Збільшити кількість велосипедів"
+                            class="grid size-10 shrink-0 place-items-center rounded-full bg-surface-alt text-lg font-bold transition hover:bg-accent disabled:cursor-not-allowed disabled:opacity-40">+</button>
+                  </div>
+
+                  <p id="bikes-count-hint" class="mt-3 text-sm text-ink-secondary">
+                    Від 5 велосипедів діє знижка 10%. Групам понад 10 осіб
+                    <a id="group-request-link" href="feedback-form/index.html" class="font-semibold text-primary underline underline-offset-2 hover:text-ink-secondary">залиште заявку</a>.
+                  </p>
+
+                  <p id="discount-badge" class="mt-3 inline-flex items-center gap-2 rounded-full bg-success/10 px-3 py-1 text-sm font-semibold text-success" hidden>
+                    Групова знижка −10% застосована
+                  </p>
+
+                  <p id="bikes-count-error" class="mt-2 text-sm font-medium text-danger" hidden>
+                    Введіть ціле число від 1 до 10.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- Крок 4. Маршрут (select) -->
+              <fieldset id="step-route" class="rounded-xl border border-line-subtle bg-surface-card p-4 shadow-sm md:p-6">
+                <legend id="step-route-title" class="float-left mb-4 w-full font-heading text-lg font-bold">
+                  4. Маршрут
+                </legend>
+
+                <div id="route-control" class="clear-both">
+                  <label for="route-select" id="route-select-label" class="sr-only">Оберіть маршрут</label>
+                  <div id="route-select-wrapper" class="relative">
+                    <select id="route-select" name="route" aria-describedby="route-hint"
+                            class="w-full cursor-pointer appearance-none rounded-xl border border-line-subtle bg-surface-card py-3 pl-4 pr-10 text-[15px] font-medium transition hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                      <option id="route-none" value="none" data-price="0" selected>Без маршруту</option>
+                      <option id="route-old-town" value="old-town" data-price="60">Старим містом · +60 ₴</option>
+                      <option id="route-outside" value="outside" data-price="150">За межі міста · +150 ₴</option>
+                    </select>
+                    <svg id="route-select-icon" class="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4z"/>
+                    </svg>
+                  </div>
+                  <p id="route-hint" class="mt-3 text-sm text-ink-secondary">
+                    Ціна маршруту — за всю групу, незалежно від кількості велосипедів.
+                  </p>
+                </div>
+              </fieldset>
+
+              <!-- Крок 5. Додаткове спорядження (checkbox) -->
+              <fieldset id="step-equipment" class="rounded-xl border border-line-subtle bg-surface-card p-4 shadow-sm md:p-6">
+                <legend id="step-equipment-title" class="float-left mb-4 w-full font-heading text-lg font-bold">
+                  5. Додаткове спорядження
+                </legend>
+
+                <div id="equipment-options" class="clear-both grid gap-3 sm:grid-cols-2">
+                  <label id="opt-gps-card" for="opt-gps"
+                         class="flex cursor-pointer items-center gap-3 rounded-xl border border-line-subtle p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20">
+                    <input type="checkbox" id="opt-gps" name="equipment" value="gps" data-name="GPS-навігація" data-price="0"
+                           class="size-[18px] shrink-0 cursor-pointer accent-primary">
+                    <span id="opt-gps-name" class="flex-1 text-[15px] font-medium">GPS-навігація</span>
+                    <span id="opt-gps-price" class="rounded-full bg-surface-alt px-2.5 py-1 text-xs font-semibold">Безкоштовно</span>
+                  </label>
+
+                  <label id="opt-helmet-card" for="opt-helmet"
+                         class="flex cursor-pointer items-center gap-3 rounded-xl border border-line-subtle p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20">
+                    <input type="checkbox" id="opt-helmet" name="equipment" value="helmet" data-name="Шолом безпеки" data-price="20"
+                           class="size-[18px] shrink-0 cursor-pointer accent-primary" checked>
+                    <span id="opt-helmet-name" class="flex-1 text-[15px] font-medium">Шолом безпеки</span>
+                    <span id="opt-helmet-price" class="rounded-full bg-surface-alt px-2.5 py-1 text-xs font-semibold">+20 ₴ / байк</span>
+                  </label>
+
+                  <label id="opt-seat-card" for="opt-seat"
+                         class="flex cursor-pointer items-center gap-3 rounded-xl border border-line-subtle p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20">
+                    <input type="checkbox" id="opt-seat" name="equipment" value="seat" data-name="Дитяче сидіння" data-price="50"
+                           class="size-[18px] shrink-0 cursor-pointer accent-primary">
+                    <span id="opt-seat-name" class="flex-1 text-[15px] font-medium">Дитяче сидіння</span>
+                    <span id="opt-seat-price" class="rounded-full bg-surface-alt px-2.5 py-1 text-xs font-semibold">+50 ₴ / байк</span>
+                  </label>
+
+                  <label id="opt-insurance-card" for="opt-insurance"
+                         class="flex cursor-pointer items-center gap-3 rounded-xl border border-line-subtle p-4 transition hover:border-primary has-[:checked]:border-primary has-[:checked]:bg-accent/20">
+                    <input type="checkbox" id="opt-insurance" name="equipment" value="insurance" data-name="Страховка BikeDash Care" data-price="40"
+                           class="size-[18px] shrink-0 cursor-pointer accent-primary" checked>
+                    <span id="opt-insurance-name" class="flex-1 text-[15px] font-medium">Страховка BikeDash Care</span>
+                    <span id="opt-insurance-price" class="rounded-full bg-surface-alt px-2.5 py-1 text-xs font-semibold">+40 ₴ / байк</span>
+                  </label>
                 </div>
               </fieldset>
             </div>
 
-            <!-- Самарі розрахунку: компактний блок, що супроводжує користувача -->
-            <aside class="calc-summary card-dark" aria-labelledby="summary-title">
-              <h3 class="title-s" id="summary-title">Деталізація розрахунку</h3>
-              <dl class="calc-breakdown" id="calc-breakdown">
-                <div class="line" id="summary-bike-row">
-                  <dt id="summary-bike-desc">E-Bike Turbo (2 год × 85 ₴)</dt>
-                  <dd id="summary-bike-cost">170 ₴</dd>
+            <!-- 6. Блок загальної вартості (права колонка; на мобільному — під кроками) -->
+            <aside id="calc-summary" class="rounded-xl bg-primary p-6 text-ink-inverse shadow-card lg:sticky lg:top-[90px]"
+                   aria-labelledby="summary-title">
+              <h3 id="summary-title" class="font-heading text-lg font-bold text-white">Деталізація розрахунку</h3>
+
+              <dl id="summary-breakdown" class="mt-4 divide-y divide-line-inverse text-sm">
+                <div id="summary-row-bike" class="flex justify-between gap-4 py-3">
+                  <dt id="summary-bike-label" class="text-ink-inverse-soft">E-Bike Turbo · 2 год × 85 ₴ × 1</dt>
+                  <dd id="summary-bike-cost" class="font-semibold tabular-nums text-white">170 ₴</dd>
+                </div>
+                <div id="summary-row-gps" class="flex justify-between gap-4 py-3" hidden>
+                  <dt id="summary-gps-label" class="text-ink-inverse-soft">GPS-навігація</dt>
+                  <dd id="summary-gps-cost" class="font-semibold text-white">Безкоштовно</dd>
+                </div>
+                <div id="summary-row-helmet" class="flex justify-between gap-4 py-3">
+                  <dt id="summary-helmet-label" class="text-ink-inverse-soft">Шолом безпеки × 1</dt>
+                  <dd id="summary-helmet-cost" class="font-semibold tabular-nums text-white">20 ₴</dd>
+                </div>
+                <div id="summary-row-seat" class="flex justify-between gap-4 py-3" hidden>
+                  <dt id="summary-seat-label" class="text-ink-inverse-soft">Дитяче сидіння × 1</dt>
+                  <dd id="summary-seat-cost" class="font-semibold tabular-nums text-white">50 ₴</dd>
+                </div>
+                <div id="summary-row-insurance" class="flex justify-between gap-4 py-3">
+                  <dt id="summary-insurance-label" class="text-ink-inverse-soft">Страховка BikeDash Care × 1</dt>
+                  <dd id="summary-insurance-cost" class="font-semibold tabular-nums text-white">40 ₴</dd>
+                </div>
+                <div id="summary-row-route" class="flex justify-between gap-4 py-3" hidden>
+                  <dt id="summary-route-label" class="text-ink-inverse-soft">Маршрут (за групу)</dt>
+                  <dd id="summary-route-cost" class="font-semibold tabular-nums text-white">0 ₴</dd>
+                </div>
+                <div id="summary-row-discount" class="flex justify-between gap-4 py-3" hidden>
+                  <dt id="summary-discount-label" class="text-accent">Групова знижка −10%</dt>
+                  <dd id="summary-discount-cost" class="font-semibold tabular-nums text-accent">−0 ₴</dd>
                 </div>
               </dl>
-              <div class="line line-total">
-                <strong>Разом до сплати</strong>
-                <output class="total-price" id="summary-total" aria-label="Підсумкова сума до сплати"><strong>230 ₴</strong></output>
+
+              <div id="summary-total-block" class="mt-2 border-t border-line-inverse pt-4">
+                <p id="summary-total-label" class="text-sm text-ink-inverse-soft">Разом до сплати</p>
+                <output id="summary-total" name="total"
+                        for="bike-city bike-ebike bike-mtb duration-range bikes-count route-select opt-gps opt-helmet opt-seat opt-insurance"
+                        aria-live="polite"
+                        class="mt-1 flex font-heading text-4xl font-extrabold tabular-nums text-accent md:text-5xl">230 ₴</output>
+                <p id="summary-deposit" class="mt-1 text-xs text-ink-inverse-muted">0 ₴ депозит · оплата після підтвердження</p>
               </div>
-              <p class="text-s">0 ₴ депозит</p>
-              <a class="btn btn-accent transition-[background-color,box-shadow,color] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#171A18] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3FBF3] hover:bg-[#A5DC2F] hover:shadow-[0_4px_18px_rgba(184,242,58,0.4)]" id="calc-to-booking" href="#booking">Перейти до оплати та розблокування</a>
+
+              <a id="calc-to-booking" href="#booking"
+                 class="mt-6 flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-[15px] font-bold text-primary transition hover:bg-accent-hover hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary active:scale-95">
+                Забронювати
+                <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M10.3 4.3a1 1 0 0 1 1.4 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3H4a1 1 0 1 1 0-2h9.6l-3.3-3.3a1 1 0 0 1 0-1.4z"/>
+                </svg>
+              </a>
             </aside>
           </form>
         </div>
       </section>
+
+      <!-- Мобільна панель підсумку (до 1024 px). Показуватиме JS, коли калькулятор у полі зору -->
+      <div id="mobile-total-bar" role="region" aria-label="Підсумок оренди"
+           class="fixed inset-x-0 bottom-0 z-40 border-t border-line-inverse bg-primary px-5 py-3 text-white shadow-card lg:hidden" hidden>
+        <div id="mobile-total-inner" class="mx-auto flex max-w-container items-center justify-between gap-4">
+          <div id="mobile-total-info">
+            <p id="mobile-total-label" class="text-xs text-ink-inverse-muted">Разом</p>
+            <p id="mobile-total" class="font-heading text-2xl font-extrabold tabular-nums text-accent">230 ₴</p>
+          </div>
+          <a id="mobile-to-booking" href="#booking"
+             class="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-primary transition hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary">
+            Забронювати
+          </a>
+        </div>
+      </div>
 
       <!-- Каталог велосипедів: картки синхронізовані з калькулятором -->
       <section class="block" id="bikes" aria-labelledby="bikes-title">
@@ -913,179 +1125,6 @@
 </footer>
   </div>
 
-  <!-- Повна інтерактивність калькулятора: тип байка, тривалість, спорядження та оформлення -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Елементи типу велосипеда (Крок 1)
-      const bikeButtons = document.querySelectorAll('.bike-types .option');
-      
-      // 2. Елементи тривалості оренди (Крок 2)
-      const slider = document.getElementById('duration-slider');
-      const durationVal = document.getElementById('duration-val');
-      const durationUnit = document.getElementById('duration-unit');
-      const chipButtons = document.querySelectorAll('.duration-presets .chip-btn');
-      
-      // 3. Елементи спорядження (Крок 3)
-      const equipmentButtons = document.querySelectorAll('.equipment-options .option-toggle');
-
-      // 4. Елементи деталізації розрахунку
-      const breakdownList = document.getElementById('calc-breakdown');
-      const summaryTotal = document.getElementById('summary-total');
-      const calcToBookingBtn = document.getElementById('calc-to-booking');
-
-      // 5. Елементи форми бронювання для синхронізації
-      const bookingBike = document.getElementById('booking-bike');
-      const bookingDuration = document.getElementById('booking-duration');
-      const bookingTotalPrice = document.getElementById('booking-total-price');
-
-      // Стан калькулятора
-      let selectedBike = {
-        name: 'E-Bike Turbo',
-        rate: 85
-      };
-      let selectedHours = 2;
-
-      // Граматично правильне відмінювання українською
-      function getDurationUnit(hours) {
-        const lastDigit = hours % 10;
-        const lastTwoDigits = hours % 100;
-        if (lastDigit === 1 && lastTwoDigits !== 11) return 'година';
-        if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(lastTwoDigits)) return 'години';
-        return 'годин';
-      }
-
-      // Головна функція перерахунку та оновлення інтерфейсу
-      function renderCalculator() {
-        // Оновлення повзунка
-        if (slider) {
-          slider.value = selectedHours;
-          const min = parseInt(slider.min, 10) || 1;
-          const max = parseInt(slider.max, 10) || 12;
-          const percentage = ((selectedHours - min) / (max - min)) * 100;
-          slider.style.setProperty('--slider-progress', `${percentage}%`);
-        }
-
-        // Оновлення заголовка кроку 2
-        if (durationVal) durationVal.textContent = selectedHours;
-        if (durationUnit) durationUnit.textContent = getDurationUnit(selectedHours);
-
-        // Оновлення кнопок пресетів
-        chipButtons.forEach(btn => {
-          const btnHours = parseInt(btn.dataset.hours, 10);
-          btn.classList.toggle('active', btnHours === selectedHours);
-        });
-
-        // Підрахунок базової вартості байка
-        const bikeCost = selectedHours * selectedBike.rate;
-        let totalCost = bikeCost;
-
-        // Формування динамічного списку деталізації
-        if (breakdownList) {
-          let html = `
-            <div class="line" id="summary-bike-row">
-              <dt>${selectedBike.name} (${selectedHours} год × ${selectedBike.rate} ₴)</dt>
-              <dd>${bikeCost} ₴</dd>
-            </div>
-          `;
-
-          // Додаємо лише обрані опції спорядження
-          equipmentButtons.forEach(btn => {
-            if (btn.classList.contains('option-active')) {
-              const name = btn.dataset.name;
-              const price = parseInt(btn.dataset.price, 10) || 0;
-              totalCost += price;
-              html += `
-                <div class="line">
-                  <dt>${name}</dt>
-                  <dd>${price === 0 ? '0 ₴' : price + ' ₴'}</dd>
-                </div>
-              `;
-            }
-          });
-
-          breakdownList.innerHTML = html;
-        }
-
-        // Оновлення підсумкової суми
-        if (summaryTotal) {
-          summaryTotal.innerHTML = `<strong>${totalCost} ₴</strong>`;
-        }
-
-        // Синхронізація з формою бронювання
-        if (bookingBike) bookingBike.value = selectedBike.name;
-        if (bookingDuration) bookingDuration.value = `${selectedHours} ${getDurationUnit(selectedHours)}`;
-        if (bookingTotalPrice) bookingTotalPrice.innerHTML = `<strong>${totalCost} ₴</strong>`;
-
-        // Підсвітка відповідної картки в каталозі
-        if (window.syncBikeCards) window.syncBikeCards(selectedBike.name);
-      }
-
-      // Обробники Кроку 1 (Тип байка)
-      bikeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          bikeButtons.forEach(b => {
-            b.classList.remove('option-active');
-            b.setAttribute('aria-checked', 'false');
-          });
-          btn.classList.add('option-active');
-          btn.setAttribute('aria-checked', 'true');
-
-          selectedBike.name = btn.dataset.name || 'E-Bike Turbo';
-          selectedBike.rate = parseInt(btn.dataset.rate, 10) || 85;
-
-          renderCalculator();
-        });
-      });
-
-      // Обробники Кроку 2 (Повзунок та швидкі кнопки)
-      if (slider) {
-        slider.addEventListener('input', (e) => {
-          selectedHours = parseInt(e.target.value, 10);
-          renderCalculator();
-        });
-      }
-
-      chipButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          selectedHours = parseInt(btn.dataset.hours, 10);
-          renderCalculator();
-        });
-      });
-
-      // Обробники Кроку 3 (Спорядження)
-      equipmentButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const isActive = btn.classList.toggle('option-active');
-          btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-          renderCalculator();
-        });
-      });
-
-      // Кнопка швидкого переходу до оформлення
-      if (calcToBookingBtn) {
-        calcToBookingBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.getElementById('booking');
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-            const formCard = target.querySelector('form.card');
-            if (formCard) {
-              formCard.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
-              formCard.style.borderColor = 'var(--color-accent)';
-              formCard.style.boxShadow = '0 0 0 3px rgba(184, 242, 58, 0.4)';
-              setTimeout(() => {
-                formCard.style.borderColor = '';
-                formCard.style.boxShadow = '';
-              }, 1500);
-            }
-          }
-        });
-      }
-
-      // Початковий рендер
-      renderCalculator();
-    });
-  </script>
 
   <!-- Взаємодії хедера та карток -->
   <script>
@@ -1140,7 +1179,15 @@
       document.querySelectorAll('[data-scroll-flash]').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          goTo(link.dataset.scrollFlash, '.calc-step');
+          goTo(link.dataset.scrollFlash, '#step-bike');
+        });
+      });
+
+      // --- Калькулятор → форма бронювання (плавний скрол + підсвітка форми) ---
+      ['calc-to-booking', 'mobile-to-booking'].forEach(id => {
+        document.getElementById(id)?.addEventListener('click', (e) => {
+          e.preventDefault();
+          goTo('booking', 'form.card');
         });
       });
 
@@ -1184,12 +1231,16 @@
       // --- Картки велосипедів ---
       const bikeCards = document.querySelectorAll('.bike-card');
 
-      // Єдине джерело правди — калькулятор: клік по кнопці типу байка, далі calc сам викличе syncBikeCards
+      // Єдине джерело правди — калькулятор (widget.js): обираємо radio і запускаємо change,
+      // далі віджет сам перерахує суму та викличе syncBikeCards
       function selectBike(card, scroll) {
-        const calcBtn = [...document.querySelectorAll('.bike-types .option')]
-          .find(b => b.dataset.name === card.dataset.bike);
-        if (calcBtn) calcBtn.click();
-        if (scroll) goTo('calculator', '.calc-step');
+        const radio = [...document.querySelectorAll('#calculator input[name="bike-type"]')]
+          .find(r => r.dataset.name === card.dataset.bike);
+        if (radio && !radio.checked) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        if (scroll) goTo('calculator', '#step-bike');
       }
 
       bikeCards.forEach(card => {
@@ -1203,7 +1254,7 @@
         card.querySelector('.bike-card__btn').addEventListener('click', () => selectBike(card, true));
       });
 
-      // Викликається з renderCalculator()
+      // Викликається з widget.js після кожного перерахунку
       window.syncBikeCards = function (bikeName) {
         bikeCards.forEach(card => {
           const on = card.dataset.bike === bikeName;

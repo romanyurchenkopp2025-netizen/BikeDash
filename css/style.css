@@ -1764,3 +1764,26 @@ main section[id] {
     min-height: 2.1em;   /* на телефоні фраза може зайняти 2 рядки */
   }
 }
+
+
+/* ==========================================================================
+   ЛР11. ВІДЖЕТ КАЛЬКУЛЯТОРА (стилі самого віджета — у класах Tailwind)
+   ========================================================================== */
+/* Атрибут hidden завжди ховає елемент віджета, навіть якщо в нього є клас flex/grid */
+#calculator [hidden],
+#mobile-total-bar[hidden] {
+  display: none !important;
+}
+
+/* Глобальне правило «button, input, select { border: none }» скасовує рамки Tailwind
+   (border-style: none). Повертаємо суцільний стиль лише тим елементам віджета,
+   яким рамку задано класом Tailwind .border. */
+#calculator :is(fieldset, button, input, select).border {
+  border-style: solid;
+}
+
+/* Глобальний :focus-visible не дублює Tailwind-кільце на картках віджета */
+#calculator input[type="radio"]:focus-visible {
+  outline: none;
+}
+
