@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
@@ -105,7 +104,7 @@
         <div class="container hero-inner">
           <div class="hero-text">
             <p class="label">Self-service · 90 секунд</p>
-            <h1 class="title-xl" id="page-title">Прокат велосипедів без черг та дзвінків.</h1>
+            <h1 class="title-xl" id="page-title">Прокат велосипедів <span class="hero-typed"><span id="typed-text"></span></span></h1>
             <p class="text hero-sub">Оренда велосипедів онлайн без застави й черг: обери байк, дізнайся точну ціну за секунди та отримай PIN-код для смарт-замка.</p>
             
             <!-- Семантичний невпорядкований список ключових переваг -->
@@ -1219,5 +1218,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
 <script src="feedback-form/assets/js/success-modal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- ЛР: Крок 5. Ініціалізація Typed.js (ефект друкування тексту в Hero) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('#typed-text') && typeof Typed !== 'undefined') {
+      const typed = new Typed('#typed-text', {
+        strings: ['без черг та дзвінків.', 'за 90 секунд.', 'без застави.'],
+        typeSpeed: 50,    // Швидкість друкування в мс
+        backSpeed: 30,    // Швидкість стирання
+        loop: true        // Зациклення ефекту
+      });
+    }
+  });
+</script>
 </body>
 </html>
